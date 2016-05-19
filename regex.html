@@ -1,0 +1,544 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<link href='http://fonts.googleapis.com/css?family=Neuton:200' rel='stylesheet' type='text/css'></link>
+		<link href='grassy.css' rel='stylesheet' type='text/css'></link>
+		<link rel="icon" type="image/png" sizes="16x16" href="favicon.ico">
+		<title>Casey Greene</title>
+	</head>
+	<body>
+		<div class="container">
+			<div class="header">
+				<span class="helper"></span>
+				<a href="index.html"id= "header_image"><img class="img" src="Casey Greene.png" alt="Casey Greene" width="508" height="104" /></a>
+			</div>
+			<div id="navcontainer">
+				<ul>
+				<li><a href="index.html" title="Home" target="_self">Home</a></li>
+				<li><a href="resume.html" title="Resumé" target="_self">Resumé</a></li>
+				<li><a href="awesome.html" title="Awesomé" target="_self">Awesomé</a></li>
+				<li><a href="crowdfunding.html" title="Crowdfunding" target="_self">Crowdfunding</a></li>
+				<li><a href="http://caseymgreene.tumblr.com/" title="Blog" target="_self">Blog</a></li>
+				<li><a href="contact.html" title="Contact" target="_self">Contact</a></li>
+				</ul>
+			</div>
+			<div class="content">
+				<p><strong><span style="font-size: 200%;">Regular Expressions for URL Targeting</span></strong></p>
+					<p>Regular expressions are used widely in computer programming, allowing people to search through many lines of code for a specific piece of data or find a very specific and precise set of information that would otherwise take them many hours of searching and sifting. At Qualaroo, we use regular expressions (shortened to regex and regexes) to allow you to target your surveys to a specific set of pages, or to URLs that are more complex.</p>
+					<p>There's a lot of information about regexes on the internet, and a lot of it isn't really applicable to how you'll be using them at Qualaroo, so we've created this guide to Regexes for URL Targeting to help you get started.</p>
+					<p>We'll cover the following topics:</p>
+					<ul>
+						<li>Regular Expression Basics</li>
+						<li>The Regular Expression Interface</li>
+						<li>Backslash - Escape!</li>
+						<li>Question Mark - Not Required</li>
+						<li>Digits and Word Characters</li>
+						<li>Dot-Star: Anything Goes!</li>
+						<li>The Or Pipe - Smoke 'em If You Got 'em</li>
+						<li>Using Parentheses, Brackets and Sets</li>
+						<li>Lookahead Delimiters</li>
+						<li>More Resources</li>
+						<li>Formatting URLs in the old Regex Interface</li>
+					</ul>
+					<p>You can also download this guide in a single PDF from the link below.</p>
+					<p>Casey please put a link here</p>
+				<hr />
+				<hr />
+				<h1>Regular Expression Basics</h1>
+					<p>Regular Expressions use punctuation characters to tell a computer what to do when looking for something -</p>
+						<ul>
+							<li>start looking</li>
+							<li>find this kind of character</li>
+							<li>this many</li>
+							<li>look for this particular thing and then ignore the result</li>
+							<li>stop looking</li>
+						</ul>
+					<p>Regexes look really complicated sometimes, and it can take a lot of work to figure out what is actually going on. That's because regular expressions were made by programmers, for computers, and aren't designed to be user-friendly. But don't worry! Once you start using regular expressions, and the characters, they'll get easier.&nbsp;</p>
+					<p>Here's a list of the things you'll be using most often*:</p>
+					<h2>Regex Characters</h2>
+						<p><code>.</code> &ndash; Matches any character.</p>
+						<p><code>a*</code> &ndash; Matches zero or more of the preceding character (in this case, a)</p>
+						<p><code>a+</code> &ndash; Matches one or more of the preceding character.</p>
+						<p><code>a?</code> &ndash; Preceding character is optional. Matches zero or one occurrence.</p>
+						<p><code>\d</code> &ndash; Matches any single digit</p>
+						<p><code>\w</code> &ndash; Matches any word character (letters, numbers and underscore).</p>
+						<p><code>(a|b)</code> - Matches a OR b</p>
+						<p><code>[xyz]</code> &ndash; Matches any single character in the brackets: x, y, OR z.</p>
+						<p><code>[^a-z]</code> &ndash; When inside of a character class, the ^ means NOT. Here, match anything that is NOT a lowercase letter.</p>
+						<p><code>[A-Z]</code> &ndash; Capital A through Capital Z.</p>
+						<p><code>[a-z]{2}</code> &ndash; Exactly 2 a-z letters. (hint: this is useful for URLs like testing-site.com/<strong>en</strong> or /<strong>fr</strong>)</p>
+						<p>&nbsp;(* Please see the Note on Regular Expression Characters.)</p>
+						<hr />
+					<h2>The Regular Expression Interface</h2>
+						<p>At Qualaroo, we've made a special effort to make the regex interface as easy to use as possible. We split the URL into three parts: <strong><font color="330099">Subdomain</font></strong>, <strong><font color="0033FF">Top-Level Domain (TLD)</font></strong> and <strong><font color="FF9933">Path</font></strong>.</p>
+						<p>casey please put an image here</p>
+						<p>The <strong><font color="330099">Subdomain</font></strong> is everything between the http:// and yourwebsite.com. This can be www, development, help, blog, hotels, or any other section of your website that comes before the actual domain. You will be able to use regular expressions here.
+						<p>The <strong><font color="0033FF">TLD</font></strong> is the main part of your website - time.com, wikipedia.org, stanford.edu, ox.ac.uk. Once you've entered the TLD in the appropriate regex field, Qualaroo's interface will remember it for the next survey you make. All you have to do is start typing, and it will fill in the rest.
+						<p>The <strong><font color="FF9933">Path</font></strong> is everything that comes after the TLD, all the pages, folders, sections, images, search results - everything on your website. This is where you will probably be using most of your regular expressions, so you can target your surveys to specific sections, types of pages, certain keywords, and any other conditions you want.
+						<p>Throughout this guide, we will go over the regex characters and their meanings, examples of when to use each character, and provide examples of how you should enter your regex in the interface. These examples will look like this:
+						<table border="2" cellspacing="0" cellpadding="4">
+							<tr>
+								<td>
+									<p>To use this example, you would add the following to your regex fields:</p>
+									<p><strong><font color="330099">Subdomain</font>: <code>(www\.)?</code></strong></p>
+									<p><strong><font color="0033FF">TLD</font>: <code>qualaroo.com</code></strong></p>
+									<p><strong><font color="FF9933">Path</font>: <code>pricing</code></strong></p>
+								</td>
+							</tr>
+						</table>	
+						<p>The colors we used in these examples were chosen to match the regex validator. This is an extra tool we created to let you validate your regex. Using this tool will allow you to make sure that the regex you created matches the pages you want it to. The validator will tell you if a URL matches or not.</p>
+						<p>casey please put an image here</p>
+						You should always try to test several URLs - some that match your pattern, and you would like to target with the survey, and some that don't match, to make sure they aren't being included by mistake.
+						<p>casey please put an image here</p>
+						<p><em>Note</em>: If you are using an older survey, it may not have the new interface. Please see the section on "Formatting URLs in the old Regex Interface" for how to format your regexes.</p>
+					<h2>Backslash - Escape!</h2>
+						<p>You'll also see a lot of these: <code>\</code> (backslash) These have a very special use - they "escape" the character that comes afterward, and tell the computer to treat it differently. If you don't escape the special characters, they are treated as part of the regex. In a URL, you have to escape the periods:</p>
+						<p><code>helloworld\.html</code></p>
+						<p>This tells the computer that you mean helloworld -dot- html, not helloworld&nbsp;-any character- html.&nbsp;</p>
+						<p>You will also need to escape slashes (/) and you will end up with a pattern like this:</p>
+						<p><code>\/</code></p>
+						<p>Put them together, and you will get:</p>
+						<p><code>helloworld\.html\/</code></p>
+						<p>You can see examples of where we use escape characters in the regex validator:</p>
+						<p>casey please put an image here</p>
+						<p>In purple, Qualaroo automatically escapes the periods and slashes in between the three fields, so you don't have to worry about those. In pink, we escape the backslashes, periods and question marks that we want to include in the URL as-is.</p>
+						<p>At the end of the regex in green, we leave the period and asterisk unescaped, because we want to use them as special characters.</p>
+						<hr />
+					<h2>Question Mark - Not Required</h2>
+						<p>The question mark is one of the most versatile characters in regular expressions. It is used to mean that whatever came before it is optional - there can be 0 or 1 occurrence.</p>
+						<p>You can use it for single characters:</p>
+						<p><code>cats?</code> will match <code>cat</code> and <code>cats</code></p>
+						<p>Or for whole words by using parentheses:</p>
+						<p><code>(an)?droid</code> will match <code>android</code> and <code>droid</code></p>
+						<p>Some websites are set up so that you can go to both <strong>www.site.com</strong> and <strong>site.com</strong>. If you're using a regex on a website like this, you will want to use the question mark to make sure pages on the www.site.com version show up.</p>
+						<table border="2" cellspacing="0" cellpadding="4">
+							<tbody>
+								<tr>
+									<td>
+										<p>To use this example, you would add the following to your regex fields:</p>
+										<p><strong><font color="330099">Subdomain</font>: <code>(www\.)?</code></strong></p>
+										<p><strong><font color="0033FF">TLD</font>: <code>site.com</code></strong></p>
+										<p><strong><font color="FF9933">Path</font>: <code><br /></code></strong></p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<p>If your website always uses www.site.com, then just make sure to add <code>www</code> in the Subdomain field.&nbsp;</p>
+						<table border="2" cellspacing="0" cellpadding="4">
+							<tbody>
+								<tr>
+									<td>
+										<p>To use this example, you would add the following to your regex fields:</p>
+										<p><strong><font color="330099">Subdomain</font>: <code>www</code></strong></p>
+										<p><strong><font color="0033FF">TLD</font>: <code>site.com</code></strong></p>
+										<p><strong><font color="FF9933">Path</font>: <code><br /></code></strong></p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<p>Note that you will not have to escape the period after the www, Qualaroo will take care of that for you.</p>
+						<p>In the new regex interface, you no longer need to deal with formatting your regex for https. However, if you're using an older survey, you may need to know how to do this so that your regex works properly. Please see the next section for more information.</p>
+						<hr />
+					<h2>Digits and Words</h2></a>
+						<h3>Digits</h3>
+							<p>We also use backslashes with <code>\d</code> and <code>\w</code> - this tells the computer you want to use the d and w as part of the regular expression, not as part of the search:</p>
+							<p><strong><code>example-file-\d\.html</code></strong></p>
+							<p>will give you</p>
+							<p><code>example-file-0.html</code></p>
+							<p><code>example-file-1.html</code></p>
+							<p><code> example-file-2.html</code></p>
+							<p><code>...</code></p>
+							<p><code>example-file-9.html</code></p>
+							<p>Remember that <code>\d</code> is only for a *single* digit, so if you wanted to have longer numbers, you would use this:</p>
+							<p><strong><code>example-file-\d+\.html</code></strong></p>
+							<p>This tells a computer to match any digit, at least one digit. So the results from this search would get you</p>
+							<p><code>example-file-0.html</code></p>
+							<p><code>example-file-1.html</code></p>
+							<p><code>example-file-2.html</code></p>
+							<p><code>...</code></p>
+							<p><code>example-file-10.html</code></p>
+							<p><code>...</code></p>
+							<p><code>example-file-2450.html</code></p>
+							<p><code>...</code></p>
+							<p>and so on.</p>
+							<table border="2" cellspacing="0" cellpadding="4">
+								<tbody>
+									<tr>
+										<td>
+											<p>To use this example, you would add the following to your regex fields:</p>
+											<p><strong><font color="330099">Subdomain</font>: <code>(www\.)?</code></strong></p>
+											<p><strong><font color="0033FF">TLD</font>: <code>website.com</code></strong></p>
+											<p><strong><font color="FF9933">Path</font>: <code>example-file-\d+\.html</code></strong></p>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						<h3>Word Characters</h3>
+							<p>Say you want to target pages with human-readable names that don't use special characters. Maybe these are photo album folders, or documents that your users have created. We can do this easily by using the \w function:</p>
+							<p><strong><code>\w+\.php</code></strong></p>
+							<p>This will match any file with only word characters (a-z, A-Z and _) in the name. Here are some example files that this regex will match:</p>
+							<p><code>paris.php</code></p>
+							<p><code>Melbourne.php</code></p>
+							<p><code>McMurdo_Field_Work_Summer_2012.php</code></p>
+							<p><code>Christmas1997.php</code></p>
+							<p><code>SpencerBirthday_Age5.php</code></p>
+							<p><code>SFTrip20030206.php</code></p>
+							<table border="2" cellspacing="0" cellpadding="4">
+								<tbody>
+									<tr>
+										<td>
+											<p>To use this example, you would add the following to your regex fields:</p>
+											<p><strong><font color="330099">Subdomain</font>: <code>(www\.)?</code></strong></p>
+											<p><strong><font color="0033FF">TLD</font>: <code>website.com</code></strong></p>
+											<p><strong><font color="FF9933">Path</font>:&nbsp;<strong><code>\w+\.php</code></strong></strong></p>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						<hr />
+					<h2>Dot-Star: Anything Goes!</h2>
+						<p>One combination of characters that you will be using a lot is <strong><code>.*</code></strong> This means "any character" "zero or more times" and is great for all sorts of URL pieces:</p>
+						<p><strong><code>.*\/help</code></strong></p>
+						<p>Will match&nbsp;</p>
+						<p><code>website.com/<strong>users</strong>/help</code></p>
+						<p><code>website.com/<strong>photos</strong>/help</code></p>
+						<p><code>website.com/<strong>cats</strong>/help</code></p>
+						<p><code>website.com/<strong>documentation</strong>/help</code></p>
+						<p><code>website.com/<strong>any-P0ss1ble_characters</strong>/help</code></p>
+						<table border="2" cellspacing="0" cellpadding="4">
+							<tbody>
+								<tr>
+									<td>
+										<p>To use this example, you would add the following to your regex fields:</p>
+										<p><strong><font color="330099">Subdomain</font></strong>: <code>(www\.)?</code></p>
+										<p><strong><font color="0033FF">TLD</font></strong>: <code>website.com</code></p>
+										<p><strong><font color="FF9933">Path</font></strong>: <code>.*\/help</code></p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<p><em>Note</em>: If you want to target every page on your website, it's a lot easier to use the <a href="http://qualaroo1.zendesk.com/hc/en-us/articles/201405546">Simple URL Targeting field</a>. That way, you only need to use a * at the end of your URL, and Qualaroo will do the rest.</p>
+						<hr />
+					<h2>The Or Pipe - Smoke 'em If You Got 'em</h2>
+						<p>The OR character <code>|</code> (also called a "pipe") is very useful when you just want your survey to show on a few specific pages, or in two or more sections. Say you want to match these pages: 
+						<p><code>blog.mycats.com/peggysue.html</code></p>
+						<p><code>blog.mycats.com/turbo.html</code></p>
+						<table border="2" cellspacing="0" cellpadding="4">
+							<tr>
+								<td>
+									<p>To use this example, you would add the following to your regex fields:</p>
+									<p><strong><font color="330099">Subdomain</font>: <code>blog</code></strong></p>
+									<p><strong><font color="0033FF">TLD</font>: <code>mycats.com</code></strong></p>
+									<p><strong><font color="FF9933">Path</font>: <code>(peggysue|turbo)\.html</code></strong></p>
+								</td>
+							</tr>
+						</table>
+						<p>You can use this anywhere in the regex, and as many times as you like, too:</p>
+						<p>If you want to target the gallery pages of the Brazil, Chile and Argentina sections on largetravelcompany.com, using the OR pipe makes this very easy.</p>
+						<table border="2" cellspacing="0" cellpadding="4">
+							<tr>
+								<td>
+									<p>To use this example, you would add the following to your regex fields:</p>
+									<p><strong><font color="330099">Subdomain</font>: <code>(brazil|chile|argentina)</code></strong></p>
+									<p><strong><font color="0033FF">TLD</font>: <code>largetravelcompany.com</code></strong></p>
+									<p><strong><font color="FF9933">Path</font>: <code>gallery</code></strong></p>
+								</td>
+							</tr>
+						</table>
+						<p>You can even use multiple OR characters in the same regex, to target several pages across multiple subdomains.
+						<table border="2" cellspacing="0" cellpadding="4">
+							<tr>
+								<td>
+									<p>To use this example, you would add the following to your regex fields:</p>
+									<p><strong><font color="330099">Subdomain</font>: <code>(library|parks)</code></strong></p>
+									<p><strong><font color="0033FF">TLD</font>: <code>smalltown.gov</code></strong></p>
+									<p><strong><font color="FF9933">Path</font>: <code>(kids|special_events|holiday)-activities\/sign_up_form</code></strong></p>
+								</td>
+							</tr>
+						</table>
+						<hr />
+					<h2>Using Parentheses, Brackets and Sets</h2>
+							<p>Parentheses and brackets are very useful characters for grouping words and ranges of letters and numbers, and being very precise in exactly which URLs you are targeting. From before, these are the characters and their uses:</p>
+							<p><code>(a|b) - Matches a OR b</code></p>
+							<p><code>[xyz]</code> &ndash; Matches any single character in the brackets: x, y, OR z.</p>
+							<p><code>[^a-z]</code> &ndash; When inside of a character class, the ^ means NOT. Here, match anything that is NOT a lowercase letter.</p>
+							<p><code>[A-Z]</code> &ndash; Capital A through Capital Z.</p>
+							<p><code>[a-z]{2}</code> &ndash; Exactly 2 a-z letters. </p>
+							<h3>Parentheses</h3>
+							<p>Using the parentheses and the OR pipe, you can tell your regex to target one word (sometimes called a "string") or another in your URL. This is what we used earlier:</p>
+							<table border="2" cellspacing="0" cellpadding="4">
+								<tr>
+									<td>
+										<p>To use this example, you would add the following to your regex fields:</p>
+										<p><strong><font color="330099">Subdomain</font>: <code>blog</code></strong></p>
+										<p><strong><font color="0033FF">TLD</font>: <code>mycats.com</code></strong></p>
+										<p><strong><font color="FF9933">Path</font>: <code>(peggysue|turbo)\.html</code></strong></p>
+									</td>
+								</tr>
+							</table>
+							<p>and it targets <code>blog.mycats.com/peggysue.html</code> and <code>blog.mycats.com/turbo.html</code></p>
+						<h3>Brackets and Curly Braces</h3>
+							<p>You can use the brackets to target a range of letters (like a-z or a-f) or numbers (0-9, 1-5). You can also use the curly brackets to ask for a specific number of letters or numbers, or a range that you will allow. </p>
+							<p>If you want to target a survey across several sections of your website, you can use the OR pipe, or the brackets, if they have a similar format. For example, if you want to target the following sections:</p>
+							<p><code>www.international.com/<strong>en</strong>/products</code></p>
+							<p><code>www.international.com/<strong>ca</strong>/products</code></p>
+							<p><code>www.international.com/<strong>uk</strong>/products</code></p>
+							<p><code>www.international.com/<strong>au</strong>/products</code></p>
+							<p><code>www.international.com/<strong>nz</strong>/products</code></p>
+							<p>You can use the brackets to show the letter range <code>[a-z]</code> and curly brackets to determine how many letters you will allow <code>{2}</code>. 
+							<table border="2" cellspacing="0" cellpadding="4">
+								<tr>
+									<td>
+										<p>To use this example, you would add the following to your regex fields:</p>
+										<p><strong><font color="330099">Subdomain</font>: <code>www</code></strong></p>
+										<p><strong><font color="0033FF">TLD</font>: <code>international.com</code></strong></p>
+										<p><strong><font color="FF9933">Path</font>: <code>[a-z]{2}\/products</code></strong></p>
+									</td>
+								</tr>
+							</table>
+							<p>You can put them together to target pages that have a specific format in the URL, like 6 letters and 8 numbers.</p>
+							<table border="2" cellspacing="0" cellpadding="4">
+							<tr>
+								<td>
+									<p>To use this example, you would add the following to your regex fields:</p>
+										<p><strong><font color="330099">Subdomain</font>: <code>(www\.)?</code></strong></p>
+										<p><strong><font color="0033FF">TLD</font>: <code>gifts-for-everyone.org</code></strong></p>
+										<p><strong><font color="FF9933">Path</font>: <code>holiday\/special_deals\/[a-z]{6}-[0-9]{8}</code></strong></p>
+									</td>
+								</tr>
+							</table>
+							<p>This regex will match pages like:
+							<p><code>www.gifts-for-everyone.org/holiday/special_deals/<strong>lawnmo-45061367</strong></code></p>
+							<p><code>www.gifts-for-everyone.org/holiday/special_deals/<strong>hairdr-00002239</strong></code></p>
+							<p><code>www.gifts-for-everyone.org/holiday/special_deals/<strong>poster-08825041</strong></code></p>
+							<p>It will not match the following pages:</p>
+							<p><code>development.gifts-for-everyone.org/holiday/special_deals/<strong>lawnmo-45061367</strong></code> - wrong subdomain</p>
+							<p><code>www.gifts-for-everyone.org/holiday/special_deals/<strong>lawnmower-45061367</strong></code> - wrong number of letters</p>
+							<p><code>www.gifts-for-everyone.org/holiday/special_deals/<strong>lawnmo-451367</strong></code> - wrong number of numbers</p>
+							<p>If you'd like more flexibility in the ranges of letters and numbers in the pages you want to target, the curly brackets can be used for this as well. Say you want to target the same kinds of pages as before, but there can be between 4 and 8 letters, and between 2 and 8 numbers.</p>
+							<table border="2" cellspacing="0" cellpadding="4">
+								<tr>
+									<td>
+										<p>To use this example, you would add the following to your regex fields:</p>
+										<p><strong><font color="330099">Subdomain</font>: <code>(www\.)?</code></strong></p>
+										<p><strong><font color="0033FF">TLD</font>: <code>gifts-for-everyone.org</code></strong></p>
+										<p><strong><font color="FF9933">Path</font>: <code>holiday\/special_deals\/[a-z]{4,8}-[0-9]{2,8}</code></strong></p>
+									</td>
+								</tr>
+							</table>
+							<p>This will allow the survey to be targeted at a wider range of pages, including:</p>
+							<p><code>www.gifts-for-everyone.org/holiday/special_deals/<strong>bowl-27</strong></code>
+							<p><code>www.gifts-for-everyone.org/holiday/special_deals/<strong>heatlamp-00019223</strong></code>
+							<p><code>www.gifts-for-everyone.org/holiday/special_deals/<strong>boots-4512</strong></code>
+							<p><code>www.gifts-for-everyone.org/holiday/special_deals/<strong>catmitte-123380</strong></code>
+						<h3>Multi-Digit Number Ranges</h3>
+							<p>One of the very few restrictions in regular expressions is that it doesn't know how to deal with numbers greater than 9. To do ranges in the double or triple digits, you must specify the range of each digit. For example, if you want to target pages with numbers 25-50, you would have to use a few sets of numbers and ranges. Specifically, you must define 25-29, then 30-49, then 50. First we will make each range, and then put them together into a single regex.</p>
+							<p><code>2[5-9]</code> will match 25-29</p>
+							<p><code>(3|4)[0-9]</code> will match 30-30 or 40-49</p>
+							<p><code>50</code> will match 50</p>
+							<p>Since we want to target any of these pages, we use the OR pipe to separate each number range.
+							<p><code>(<strong>2[5-9]</strong>|<strong>(3|4)[0-9]</strong>|<strong>50</strong>)</code>
+							<table border="2" cellspacing="0" cellpadding="4">
+								<tr>
+									<td>
+										<p>To use this example, you would add the following to your regex fields:</p>
+										<p><strong><font color="330099">Subdomain</font>: <code>www</code></strong></p>
+										<p><strong><font color="0033FF">TLD</font>: <code>learning_math_is_fun.com</code></strong></p>
+										<p><strong><font color="FF9933">Path</font>: <code>chapter_(<strong>2[5-9]</strong>|<strong>(3|4)[0-9]</strong>|<strong>50</strong>)</code></strong></p>
+									</td>
+								</tr>
+							</table>
+						<hr />
+						<hr />
+				<h1>Lookahead and Lookbehind Delimiters</h1>
+						<p>Sometimes you may want to target a wide range of pages, but not include some that might otherwise be caught up (like mysite.com/products/<strong>item-###</strong>, /products/<strong>seasonal-###</strong> but excluding /products/<strong>promo-###</strong>)</p>
+						<p>Regular expressions have this great feature called "lookahead" and "lookbehind" and these are used quite literally, to look ahead in the URL to target something, or to look behind a particular portion and make sure that another part is included. These can be used in the "positive" or "negative" sense, meaning a regex can look ahead and explicitly include (positive) or exclude (negative) a particular thing.</p>
+					<h2>Negative Lookahead</h2>
+						<p>One of the most useful implementations of this is the <strong>negative lookahead</strong>. It allows you to exclude whole sets of pages, files, subdomains, or any other part of the URL you don't want to target. In regex terms, it looks for something that is NOT followed by something else. You specify what you DON'T want to include, and put it inside of these characters <strong><code>(?!StuffYouDontWant)</code></strong></p>
+						<h3>Example 1: Excluding a Folder</h3>
+							<p>I want to target my survey to all the pages on http://mysite.com/photos/, /cats/, and /documentation/ but not /users/ or any other single pages. 
+							<table border="2" cellspacing="0" cellpadding="4">
+								<tr>
+									<td>
+										<p>To use this example, you would add the following to your regex fields:</p>
+										<p><strong><font color="330099">Subdomain</font>: <code>(www\.)?</code></strong></p>
+										<p><strong><font color="0033FF">TLD</font>: <code>mysite.com</code></strong></p>
+										<p><strong><font color="FF9933">Path</font>: <code>(?!users)\/.*</code></strong></p>
+									</td>
+								</tr>
+							</table>
+							<p>This will target any page on my site in a subfolder, EXCEPT for all pages in the /users/ section, and anything not in a subfolder. For example,</p>
+							<p><code>http://mysite.com/photos/NevadaDesert.html</code></p>
+							<p><code>http://mysite.com/photos/DeathValley.html</code></p>
+							<p><code>http://mysite.com/photos/Carrum.html</code></p>
+							</br>
+							<p><code>http://mysite.com/cats/PeggySue.html</code></p>
+							<p><code>http://mysite.com/cats/Turbo.html</code></p>
+							</br>
+							<p><code>http://mysite.com/documentation/Qualaroo.html</code></p>
+							<p><code>http://mysite.com/documentation/personalwebsite.txt</code></p>
+							<p><code>http://mysite.com/documentation/NextBigAndroidApp.php</code></p>
+							<p><code>http://mysite.com/documentation/1337Resume.html</code></p>
+							<p>And these pages do not show surveys:</p>
+							<p><code>http://mysite.com/users/admin</code></p>
+							<p><code>http://mysite.com/users/user1234</code></p>
+							<p><code>http://mysite.com/users/mom</code></p>
+							</br>
+							<p><code>http://mysite.com/contact</code></p>
+							<p><code>http://mysite.com/about-us</code></p>
+							<p><code>http://mysite.com/pricing/</code></p>
+							<p><code>http://blog.mysite.com/</code></p>
+							<hr />
+						<h3>Example 2: Excluding Groups of Pages</h3>
+							<p>For the example used earlier in this section, say you want to target all the item pages in snacktastic.com/products/<strong>item-###</strong>, snacktastic.com/products/<strong>seasonal-###</strong> but excluding snacktastic.com/products/<strong>promo-###</strong>.
+							<table border="2" cellspacing="0" cellpadding="4">
+								<tr>
+									<td>
+										<p>To use this example, you would add the following to your regex fields:</p>
+										<p><strong><font color="330099">Subdomain</font>: <code>(www\.)?</code></strong></p>
+										<p><strong><font color="0033FF">TLD</font>: <code>snacktastic.com</code></strong></p>
+										<p><strong><font color="FF9933">Path</font>: <code>products\/(?!promo)-\d+\/?</code></strong></p>
+									</td>
+								</tr>
+							</table>
+							<p>The survey will show up on:</p>
+							<p><code>http://snacktastic.com/products/item-0733</code></p>
+							<p><code>http://snacktastic.com/products/item-561211</code></p>
+							<p><code>http://snacktastic.com/products/seasonal-559</code></p>
+							<p><code>http://snacktastic.com/products/seasonal-01223</code></p>
+							<p>But not</p>
+							<p><code>http://snacktastic.com/products/promo-001</code></p>
+							<p><code>http://snacktastic.com/products/promo-55776</code></p>
+							<p>You could also use the <code>|</code> character to get the same results.</p>
+							<table border="2" cellspacing="0" cellpadding="4">
+								<tr>
+									<td>
+										<p>To use this example, you would add the following to your regex fields:</p>
+										<p><strong><font color="330099">Subdomain</font>: <code>(www\.)?</code></strong></p>
+										<p><strong><font color="0033FF">TLD</font>: <code>snacktastic.com</code></strong></p>
+										<p><strong><font color="FF9933">Path</font>: <code>products\/(item|seasonal)-\d+\/?</code></strong></p>
+									</td>
+								</tr>
+							</table>
+							<p>There's lots of ways to get to the same answer with regular expressions. You might find yourself using one set of tools more frequently than another, and that's fine.</p>
+					<h2>Positive Lookahead</h2>
+						<p>A Positive Lookhead is basically the opposite of a negative lookahead - it defines a pattern that MUST appear in the URL for the page to be targeted. This is done by adding (?= ) around whatever you want to require.</p>
+						<p>If you want to target any page on your site with "dragonfly" in the URL, you can do so very easily.</p>
+						<table border="2" cellspacing="0" cellpadding="4">
+							<tr>
+								<td>
+									<p>To use this example, you would add the following to your regex fields:</p>
+									<p><strong><font color="330099">Subdomain</font>: <code>(www\.)?</code></strong></p>
+									<p><strong><font color="0033FF">TLD</font>: <code>naturaljewelrydesigns.com</code></strong></p>
+									<p><strong><font color="FF9933">Path</font>: <code>.*(?=dragonfly)</code></strong></p>
+								</td>
+							</tr>
+						</table>
+						<p>This regex will match any page with "dragonfly" <strong>anywhere</strong> in the URL path:</p>
+						<p><code>http://www.naturaljewelrydesigns.com/<strong>dragonfly</strong></code></p>
+						<p><code>http://www.naturaljewelrydesigns.com/products/rings/<strong>dragonfly</strong></code></p>
+						<p><code>http://www.naturaljewelrydesigns.com/new_designs/green<strong>dragonfly</strong>.php</code></p>
+						<p>You can also combine the positive lookahead with other regex characters:</p>
+						<table border="2" cellspacing="0" cellpadding="4">
+							<tr>
+								<td>
+									<p>To use this example, you would add the following to your regex fields:</p>
+									<p><strong><font color="330099">Subdomain</font>: <code>(www\.)?</code></strong></p>
+									<p><strong><font color="0033FF">TLD</font>: <code>naturaljewelrydesigns.com</code></strong></p>
+									<p><strong><font color="FF9933">Path</font>: <code>.*(?=dragonf(ly|lies|ire))</code></strong></p>
+								</td>
+							</tr>
+						</table>
+						<p>A regex like this will match any page with the words <code>dragonfly</code>, <code>dragonflies</code> and <code>dragonfire</code> in the URL path.
+				<hr />
+				<hr />
+				<h1>More Resources</h1>
+					<h2>Note on Regular Expression Characters</h2>
+						<p>It is important to point out that the regular expression features that are supported by Qualaroo depend on those supported by JavaScript. Consequently, these regular expression features are not supported by Qualaroo:</p>
+						<ul>
+							<li>
+								<p><code>s</code> (single-line mode) and <code>x</code> (extended syntax) flag</p>
+							</li>
+							<li>
+								<p><code>\a \e \l \u \L \U \E \Q \A \Z \z \G</code> escape sequences</p>
+							</li>
+							<li>
+								<p><code>(?&lt;= )</code> positive look-behind anchor and the <code>(?&lt;! )</code> negative look-behind anchor</p>
+							</li>
+							<li>
+								<p><code>(?# )</code> comment and the other extended </code>(? )</code> syntaxes.</p>
+							</li>
+						</ul>
+					<h2>Regular Expression Testing</h2>
+						<p><strong><a href="http://regex101.com/">Regex101.com</a></strong></p>
+						<p>There are a few tools out there that let you test your regular expressions and see if the URLs you want are matched. The one we use most frequently is <a href="http://regex101.com/">http://regex101.com/</a> and it's free, provides lots of explanation for each part of the regular expression, and has a field where you can test out sample URLs to make sure they match or don't match.</p>
+						<p>At the bottom of that site is a grid of the most common regex characters. Don't be afraid to check it if you're not sure about something! There's a few more listed than what is in this guide, but their meanings aren't too difficult to understand. They also have a "complete reference" portion - most of this is targeted at programmers and while these characters can be used in your URL regular expression, most of then won't be relevant.</p>
+						<p><strong><a href="http://regexpal.com/">RegexPal.com</a></strong></p>
+						<p>Another great tool is <a href="http://regexpal.com/">http://regexpal.com/</a>. It is very similar to <a href="http://regex101.com/">http://regex101.com/</a>, but it allows you to test multiple URLs against your regex at the same time. Efficiency!</p>
+						<h2>Regular Expressions for Google Analytics</h2>
+						<p><strong><a href="http://www.lunametrics.com/">LunaMetrics</a></strong></p>
+						<p>There is a fantastic ebook put out by <a href="http://www.lunametrics.com/">LunaMetrics</a> on Regular Expressions for Google Analytics. It goes over the basics of regular expressions, and how to apply them to Google Analytics. The is the URL for the PDF form of the book: <a href="http://www.lunametrics.com/regex-book/Regular-Expressions-Google-Analytics.pdf">http://www.lunametrics.com/regex-book/Regular-Expressions-Google-Analytics.pdf</a></p>
+					<h2>Lookaheads and Lookbehinds</h2>
+						<p><strong><a href="http://www.rexegg.com/">RexEgg.com</a></strong></p>
+						<p>This page goes further in depth on lookaheads and lookbehinds: <a href="http://www.rexegg.com/regex-lookarounds.html">http://www.rexegg.com/regex-lookarounds.html</a> In general, it's a really awesome regex tutorial site. <a href="http://www.rexegg.com/">http://www.rexegg.com/</a></p>
+						<h2>Forging Bravely into the Great Unknown</h2>
+						<p><strong><a href="https://encrypted.google.com/#q=regex">Google Search</a></strong></p>
+						<p>As in most things, Google is Your Friend. However, Google is particularly difficult to use for help with regexes because it <strong>specifically excludes punctuation</strong> from search results. You know, things like <code>.*</code>, <code>(?! )</code>, <code>\/</code>, all that good stuff that makes regular expressions possible. A workaround is to preface every search with "regex" and use words to describe what you want to do. It's not the best solution, but until some whiz kid invents a new kind of serch engine, this is what we have.</p>
+						<p><strong><a href="http://stackoverflow.com/">StackOverflow.com</a></strong></p>
+						<p>Stack Overflow is a great resource for all things programming - you ask questions, other random programmer-type people on the internet help you out. Sometimes they aren't very friendly, sometimes they're awesome, sometimes they're awesome and nice but totally wrong! This is why you should always check a few different places to make sure they have the same answer, and always test your regex before it goes live. A lot of people have asked a lot of questions though, and oftentimes, these threads are what will come up in your searches.</p>
+					<h2>All Fun and No Play</h2>
+						<p><strong><a href="http://regexcrossword.com">RegexCrossword.com</a></strong></p>
+						<p>If you feel like you need a little more practive before you're ready to start making these on your own, play around with <a href="http://regexcrossword.com">http://regexcrossword.com</a>. They have a series of crossword-style puzzles, increasing in difficulty, that will help you get comfortable with the regex characters and combinations. The puzzles are also a little nerdy, so you may end up wanting re-read <em>Hitchhiker's Guide To The Galaxy</em> by the time you're through.</p>
+					<h2>Bits and Pieces</h2>
+						<p>Here's some pieces of URLs in regex form that might come in handy. On the internet, copying this kind of thing isn't considered stealing - it's just more efficient! If you don't believe us, ask one of your engineers :)
+						<p><strong><code>https?:\/\/(www\.)?</code></strong> - Start any URL with http(s)://(www.)</p>
+						<p><strong><code>[a-zA-Z]{2}</code></strong> - Exactly 2 letters (great for /EN, /fr, /No and other 2-letter language modifiers)</p>
+						<p><strong><code>.*(\.[Jj][Pp][Gg]|\.[Gg][Ii][Ff]|\.[Jj][Pp][Ee][Gg]|\.[Pp][Nn][Gg])</code></strong> - Will match any .jpg, .gif, .jpeg or .png image file, capital or lower case</p>
+					<h2>Qualaroo Support</h2>
+						<p>If you get lost at any point or want help troubleshooting your regex, drop the Qualaroo Customer Success Team a line. We're here to help you out! We hope you enjoyed this guide, and feel comfortable writing your own regular expressions now. You can do it!</p>
+					<hr />
+					<hr />
+					<h2>Formatting URL Regexes The Old Fashioned Way</h2>
+						<p>This page is for formatting regexes using an older interface. It will have a single field for the regex, not the 3-field version with subdomain, tld and path.</p>
+						<p>casey please put an image here</p>
+						<h3>HTTPS and WWW</h3>
+						<p>Since some URLs start with http, and others with https, and some of your visitors may have a browser extension that automatically turns all http URLs into https ones, it's occasionally very important to include both options within your regex. Here's how you would do that:</p>
+						<p><code>https?</code></p>
+						<p>The <code>?</code> after the "<code>s</code>" means that there can be 0 or 1 "<code>s</code>" - meaning http and https are both included. The question mark only affects the ONE character in behind it, unless you put them inside parentheses, as you'll see in just a moment. Put this together with the escaped-slash we learned earlier, and you get:</p>
+						<p><code>https?:\/\/</code></p>
+						<p>The <code>\/\/</code> pattern is the two // with escape slashes. A single slash would look like <code>\/</code>, and an optional slash would look like <code>\/?</code></p>
+						<p>We don't need to escape the : because it's not a special character.</p>
+						<p>To include the "www." you would include the following part:</p>
+						<p><code>(www\.)?</code></p>
+						<p>The parentheses around the "<code>www.</code>" mean <code>(everything in here)</code> - just like in Algebra class. We still have to escape the <code>.</code> and we add the <code>?</code> at the end to show that it's not required,&nbsp;that there can be 0 or 1 "<code>www.</code>"</p>
+						<h3>Putting the Pieces Together</h3>
+						<p>If the site we are using is http://www.website.com, our whole regex targeting it would look like:</p>
+						<p><code>https?:\/\/(www\.)?website\.com\/?</code></p>
+						<p>This will match:</p>
+						<p><code>http://website.com</code></p>
+						<p><code>http<strong>s</strong>://website.com</code></p>
+						<p><code>http://<strong>www.</strong>website.com</code></p>
+						<p><code>http<strong>s</strong>://<strong>www.</strong>website.com</code></p>
+						<p><code>http://website.com<strong>/</strong></code></p>
+						<p><code>http<strong>s</strong>://website.com<strong>/</strong></code></p>
+						<p><code>http://<strong>www.</strong>website.com<strong>/</strong></code></p>
+						<p><code>http<strong>s</strong>://<strong>www.</strong>website.com<strong>/</strong></code></p>
+						<p>Note that these URLs include all the combinations of <strong>http</strong>, <strong>https</strong>, <strong>www</strong> or <strong>no www</strong>, and the final <strong>/</strong></p>
+						<h3>The Beginning and The End</h3>
+						<p>In this older interface, we also need to tell the regex where to stop and end. This is done by using two other special characters, <code>^</code> and <code>$</code>. The <code>^</code> marks the beginning of the regex, and the <code>$</code> marks the end. Using the example from above, this would be your regex:</p>
+						<p><code>https?:\/\/(www\.)?website\.com\/?</code></p>
+						<table border="2" cellspacing="0" cellpadding="4">
+							<tbody>
+								<tr>
+									<td>
+										<p>To use this example, you would add the following to your regex field:</p>
+										<p><strong><code>^https?:\/\/(www\.)?website\.com\/?$</code></strong></p>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+				</div>
+			</div>
+	</body>
+</html>
